@@ -40,4 +40,5 @@ except ConnectionRefusedError, ConnectionError as e:
 ```
 
 # C. UML Sequence Diagram
+![361_assignment_9_UML_diagram](https://github.com/MooseAnthem/nasa_random_images_microservice/assets/45861913/e4d33267-a1b8-4aeb-becf-42fb3ef7802b)
 
