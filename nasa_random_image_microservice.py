@@ -7,7 +7,7 @@ ENDPOINT = 'https://images-api.nasa.gov/search'
 unique_session = {}
 context = zmq.Context()
 socket = context.socket(zmq.REP)
-socket.bind("tcp://localhost:8993")
+socket.bind("tcp://localhost:8989")
 
 
 def convert_nasa_href(link):

@@ -1,5 +1,6 @@
 import json
 import zmq
+from NasaRandomImage import get_random_nasa_photos
 
 try:
     context = zmq.Context()
@@ -11,13 +12,16 @@ try:
     request = {
         'image_size': 'large',
         'keywords': keywords,
-        'size': 10,
+        'number_requested': 10,
         'user_id': 1
     }
-    print(f'Sending payload to NASA Image Search Microservice...')
     socket.send_string(json.dumps(request))
     response = socket.recv()
     response = json.loads(response)
     print(response)
 finally:
     context.destroy()
+
+keywords = ['jupiter']
+for image in get_random_nasa_photos(keywords, 'orig', 5):
+    print(image)
