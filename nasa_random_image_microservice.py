@@ -23,16 +23,17 @@ while True:
     try:
         req = json.loads(request)
         keywords = ','.join(req['keywords'])
-        images_requested = req['size']
+        images_requested = req['number_requested']
         image_size = req['image_size']
+        user_id = req['user_id']
         payload = {'links': []}
 
         r = requests.get(ENDPOINT, {'keywords': keywords, 'media_type': 'image'})
         nasa_images = json.loads(r.content)
         # create a dictionary to track what images have been sent back:
-        if req['user_id'] not in unique_session:
-            unique_session[req['user_id']] = []
-        previous_images = unique_session[req['user_id']]
+        if user_id not in unique_session:
+            unique_session[user_id] = []
+        previous_images = unique_session[user_id]
         images_added = 0
         for image in nasa_images['collection']['items']:
             if images_added == images_requested:

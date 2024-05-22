@@ -3,11 +3,11 @@ import zmq
 
 try:
     context = zmq.Context()
-    sender = context.socket(zmq.REQ)
-    sender.setsockopt(zmq.IMMEDIATE, True)  # make send() blocking by default (known issue)
-    sender.connect("tcp://localhost:8993")
+    socket = context.socket(zmq.REQ)
+    socket.setsockopt(zmq.IMMEDIATE, True)  # make send() blocking by default (known issue)
+    socket.connect("tcp://localhost:8989")
 
-    keywords = ['challenger', 'explosion']
+    keywords = ['apollo', 'moon']
     request = {
         'image_size': 'large',
         'keywords': keywords,
@@ -15,8 +15,8 @@ try:
         'user_id': 1
     }
     print(f'Sending payload to NASA Image Search Microservice...')
-    sender.send_string(json.dumps(request))
-    response = sender.recv()
+    socket.send_string(json.dumps(request))
+    response = socket.recv()
     response = json.loads(response)
     print(response)
 finally:
